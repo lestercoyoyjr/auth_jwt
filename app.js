@@ -1,5 +1,5 @@
 const express = require('express')
-const morgan = require('morgan')
+const morgan = require('morgan') // It's a logger package
 const createError = require('http-errors')
 require('dotenv').config()
 require('./helpers/init_mongodb')
