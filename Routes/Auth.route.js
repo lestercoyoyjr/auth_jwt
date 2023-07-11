@@ -7,15 +7,15 @@ router.post('/register', async (req,res,next) => {
 })
 
 router.post('/login', async (req,res,next) => {
-    res.send('register.route')
+    res.send('login.route')
 })
 
 router.post('/refresh-token', async (req,res,next) => {
-    res.send('register.route')
+    res.send('refresh-token.route')
 })
 
 router.post('/logout', async (req,res,next) => {
-    res.send('register.route')
+    res.send('logout.route')
 })
 
 /*
