@@ -5,7 +5,7 @@ const { authSchema } = require ('../helpers/validation_schema')
 
 router.post('/register', async (req,res,next) => {
     try {
-        const { email, password } = req.body
+        // const { email, password } = req.body
         // if (!email || !password) throw createError.BadRequest()
         const result = await authSchema.validateAsync(req.body)
         console.log('result')
@@ -13,7 +13,7 @@ router.post('/register', async (req,res,next) => {
         const doesExist = await User.findOne({ email: result.email })
         if (doesExist)
             throw createError.Conflict(`${result.email} is already been registered`)
-        const user = new User({email, password})
+        const user = new User(result)
         const savedUser = await user.save()
         
         res.send(savedUser)
