@@ -19,8 +19,8 @@ router.post('/register', async (req,res,next) => {
         res.send(savedUser)
         
     } catch (error) {
-      if (error.isJoi === true) error.status = 422
-      next(error)
+        if (error.isJoi === true) error.status = 422
+        next(error)
     }
 })
 
