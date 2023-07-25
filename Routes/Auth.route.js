@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const AuthController = require('../Controllers/Auth.Controller')
 const { authSchema } = require ('../helpers/validation_schema')
+const { signAccessToken } = require('../helpers/jwt_helper')
 
 router.post('/register', async (req,res,next) => {
     try {
@@ -15,7 +16,7 @@ router.post('/register', async (req,res,next) => {
             throw createError.Conflict(`${result.email} is already been registered`)
         const user = new User(result)
         const savedUser = await user.save()
-        
+        const accessToken = await signAccessToken(savedUser.id)
         res.send(savedUser)
         
     } catch (error) {
