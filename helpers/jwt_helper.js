@@ -24,7 +24,6 @@ module.exports = {
       })
     })
   },
-  /*
   verifyAccessToken: (req, res, next) => {
     if (!req.headers['authorization']) return next(createError.Unauthorized())
     const authHeader = req.headers['authorization']
@@ -40,6 +39,7 @@ module.exports = {
       next()
     })
   },
+  /*
   signRefreshToken: (userId) => {
     return new Promise((resolve, reject) => {
       const payload = {}
@@ -88,5 +88,5 @@ module.exports = {
       )
     })
   },
+  */
 }
-*/
