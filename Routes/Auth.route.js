@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const AuthController = require('../Controllers/Auth.Controller')
 const { authSchema } = require ('../helpers/validation_schema')
-const { signAccessToken } = require('../helpers/jwt_helper')
+const { signAccessToken, signRefreshToken } = require('../helpers/jwt_helper')
 const createError = require('http-errors')
 
 router.post('/register', async (req,res,next) => {
@@ -37,6 +37,7 @@ router.post('/login', async (req,res,next) => {
         if(!isMatch) throw createError.Unauthorized('username/password not valid')
 
         const accessToken = await signAccessToken(user.id)
+        const refreshToken = await signRefreshToken(user.id)
 
         res.send({accessToken})
     } catch (error) {

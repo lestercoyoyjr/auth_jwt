@@ -40,7 +40,8 @@ module.exports = {
       next()
     })
   },
-  /*
+
+  // to make the user doesn't login every time the user access here
   signRefreshToken: (userId) => {
     return new Promise((resolve, reject) => {
       const payload = {}
@@ -89,5 +90,4 @@ module.exports = {
       )
     })
   },
-  */
 }
