@@ -58,6 +58,7 @@ module.exports = {
           reject(createError.InternalServerError())
         }
 
+        // redis token
         client.SET(userId, token, 'EX', 365 * 24 * 60 * 60, (err, reply) => {
           if (err) {
             console.log(err.message)
@@ -69,6 +70,7 @@ module.exports = {
       })
     })
   },
+  // Whitelisting token
   verifyRefreshToken: (refreshToken) => {
     return new Promise((resolve, reject) => {
       JWT.verify(
