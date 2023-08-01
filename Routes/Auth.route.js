@@ -5,6 +5,7 @@ const { authSchema } = require ('../helpers/validation_schema')
 const { signAccessToken, signRefreshToken, verifyRefreshToken } = require('../helpers/jwt_helper')
 const createError = require('http-errors')
 const { verify } = require('jsonwebtoken')
+const client = require('../helpers/init_redis')
 
 router.post('/register', async (req,res,next) => {
     try {
@@ -62,7 +63,21 @@ router.post('/refresh-token', async (req,res,next) => {
 })
 
 router.post('/logout', async (req,res,next) => {
-    res.send('logout.route')
+    try {
+        const {refreshToken} = req.body
+        if(!refreshToken) throw createError.BadRequest()
+        const userId = await verifyRefreshToken(refreshToken)
+        client.DEL(userId, (err, val) =>{
+            if (err){
+                console.log(err.message)
+                throw createError.InternalServerError()
+            }
+            console.log(val)
+            res.status(204)
+        })
+    } catch (error) {
+        next(error)
+    }
 })
 
 /*
