@@ -47,6 +47,7 @@ module.exports = {
       const payload = {}
       const secret = process.env.REFRESH_TOKEN_SECRET
       const options = {
+        // expiresIn: '30s', if you want to test durability
         expiresIn: '1y',
         issuer: 'pickurpage.com',
         audience: userId,
@@ -59,6 +60,8 @@ module.exports = {
         }
 
         // redis token
+        //  If you want to test refresh token expiration, use this 
+        // client.SET(userId, token, 30, (err, reply)
         client.SET(userId, token, 'EX', 365 * 24 * 60 * 60, (err, reply) => {
           if (err) {
             console.log(err.message)
